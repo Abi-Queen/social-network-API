@@ -1,9 +1,6 @@
 // require mongoose
 const { Schema, model } = require('mongoose');
 
-// require dateFormat
-const dateFormat = require('../utils/dateFormat');
-
 // validate email function
 // var validateEmail = function(email) {
 //     var re = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
