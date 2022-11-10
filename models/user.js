@@ -5,10 +5,10 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 // validate email function
-var validateEmail = function(email) {
-    var re = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-    return re.test(email)
-}
+// var validateEmail = function(email) {
+//     var re = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+//     return re.test(email)
+// }
 
 // define User schema
 const UserSchema = new Schema(
@@ -24,10 +24,15 @@ const UserSchema = new Schema(
       required: true,
       unique: true,
       trim: true,
-      validate: [validateEmail, 'Please provide a valid email address'],
+    //   validate: [validateEmail, 'Please provide a valid email address'],
       match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, 'Please provide a valid email address.']
     },
-    thoughts: [],
+    thoughts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Thought'
+        }
+    ],
     friends: [
       {
         type: Schema.Types.ObjectId,
@@ -46,10 +51,7 @@ const UserSchema = new Schema(
 
 // get total count of comments and replies on retrieval
 UserSchema.virtual('friendCount').get(function() {
-  return this.friends.reduce(
-    (total, friends) => total + friends.length + 1,
-    0
-  )
+  return this.friends.length
 })
 
 // export User model

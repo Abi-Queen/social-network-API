@@ -11,7 +11,7 @@ app.use(express.static('public'));
 
 // connect mongoose to mongodb
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pizza-hunt',
+  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/social-network-API',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
