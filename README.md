@@ -1,7 +1,7 @@
 # Social Network API
 
 ## Description
-This project is the API for a social network application. It uses Node.js and Express.js to create routes and the Mongoose ODM to connect to a MongodDB noSQL database. 
+This project is the API for a social network application to enable users to share and reply to each other's thoughts. It Express.js to create routes and the Mongoose ODM to connect to a MongoDB noSQL database. It runs with Node.js and tests the routes in Insomnia.
 
 ## Video demo
 The app is demonstrated in this [video walkthrough](link).
