@@ -1,13 +1,13 @@
 // require express and mongoose
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require('express')
+const mongoose = require('mongoose')
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+const app = express()
+const PORT = process.env.PORT || 3001
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))
 
 // connect mongoose to mongodb
 mongoose.connect(
@@ -16,13 +16,13 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }
-);
+)
 
 // log mongo queries
-mongoose.set('debug', true);
+mongoose.set('debug', true)
 
 // require routes 
-app.use(require('./routes'));
+app.use(require('./routes'))
 
 // connect to server
-app.listen(PORT, () => console.log(`🌍 Connected on localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🌍 Connected on localhost:${PORT}`))
