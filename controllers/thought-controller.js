@@ -1,7 +1,28 @@
 //import models
 const { Thought, User } = require('../models')
 
+// add findAll thought
+
 const thoughtController = {
+  findThoughts(req, res) {
+    Thought.find()
+    .then((data) => {
+      res.json(data)
+    })
+    .catch(error => {
+      res.status(500).json(error)
+    })
+  },
+  //find thought by id
+  findOneThought(req, res) {
+    Thought.findById(req.params.userId)
+    .then((data) => {
+      res.json(data)
+    })
+    .catch(error => {
+      res.status(500).json(error)
+    })
+  },
   // add thought to user
   addThought({ params, body }, res) {
     console.log(params);
