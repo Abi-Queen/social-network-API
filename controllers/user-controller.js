@@ -17,7 +17,7 @@ const userController = {
       .catch(err => {
         console.log(err)
         res.sendStatus(400)
-      });
+      })
   },
 
   // get one user by id
@@ -40,7 +40,7 @@ const userController = {
   createUser({ body }, res) {
     User.create(body)
       .then(dbUserData => res.json(dbUserData))
-      .catch(err => res.json(err));
+      .catch(err => res.json(err))
   },
 
   // update user by id
@@ -51,20 +51,53 @@ const userController = {
     })
       .then(dbUserData => {
         if (!dbUserData) {
-          res.status(404).json({ message: 'No user found with this id.' });
+          res.status(404).json({ message: 'No user found with this id.' })
           return;
         }
-        res.json(dbUserData);
+        res.json(dbUserData)
       })
-      .catch(err => res.json(err));
+      .catch(err => res.json(err))
   },
 
   // delete user
   deleteUser({ params }, res) {
     User.findOneAndDelete({ _id: params.id })
       .then(dbUserData => res.json(dbUserData))
-      .catch(err => res.json(err));
+      .catch(err => res.json(err))
+  },
+
+  // add friend
+  addFriend({ params }, res) {
+    User.findOneandUpdate(
+      { _id: params.id },
+      { $push: { friends: params.friendId } },
+      { new: true }
+    )
+    .populate({ path: 'friends',  select: '-__v' })
+    .select('-__v')
+    .then((user) => {
+      if (!user) {
+        res.status(404).json({ message: 'No user found with this id' })
+        return
+      }
+      res.json(user)
+    })
+    .catch((err) => res.json(err))
+  },
+
+  // delete friend
+  deleteFriend({ params }, res) {
+    User.findByIdAndUpdate(
+      { _id: params.id },
+      { $pull: { friends: params.friend.Id } },
+      { new: true}
+    )
+    .populate({ path: 'friends', select: '-__v' })
+    .select('-__v')
+    .then((user) => res.json(user))
+    .catch((err) => res.json(err))
   }
-};
+}
+
 
 module.exports = userController;
