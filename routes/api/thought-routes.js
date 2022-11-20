@@ -1,27 +1,26 @@
 const router = require('express').Router()
 
-// import thought-controller
+// import functions from thought-controller
 const {
   findThoughts,
   findOneThought,
   addThought,
   removeThought,
   addReaction,
-  removeReaction
+  deleteReaction
 } = require('../../controllers/thought-controller')
 
 //find all thoughts
-router.route('/').get(findThoughts)
+router.route('/')
+.get(findThoughts)
+.post(addThought)
 
-// post thought
+// find one, update delete thought by id, add or remove reactions
 router
-.route('/:userId').get(findOneThought).post(addThought)
-
-// add reaction, delete thought, delete reaction
-router
-  .route('/:userId/:thoughtId')
-  .put(addReaction)
-  .delete(removeThought)
-  .delete(deleteReaction)
+.route('/:thoughtId')
+.get(findOneThought)
+.delete(removeThought)
+.put(addReaction)
+.delete(deleteReaction) 
 
 module.exports = router

@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-/// import from user-controller
+/// import functions from user-controller
 const {
   getAllUsers,
   getUserById,
@@ -30,7 +30,7 @@ router
 .post(addFriend)
 .delete(deleteFriend)
 
-// add, delete reactions
+// add reactions
 router
 .route('/:id/reactions/:reactionId')
 
