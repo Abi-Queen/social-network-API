@@ -30,4 +30,8 @@ router
 .post(addFriend)
 .delete(deleteFriend)
 
+// add, delete reactions
+router
+.route('/:id/reactions/:reactionId')
+
 module.exports = router

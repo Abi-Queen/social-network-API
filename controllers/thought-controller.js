@@ -1,8 +1,7 @@
 //import models
 const { Thought, User } = require('../models')
 
-// add findAll thought
-
+// find all thoughts
 const thoughtController = {
   findThoughts(req, res) {
     Thought.find()
@@ -13,6 +12,7 @@ const thoughtController = {
       res.status(500).json(error)
     })
   },
+
   //find thought by id
   findOneThought(req, res) {
     Thought.findById(req.params.userId)
@@ -23,6 +23,7 @@ const thoughtController = {
       res.status(500).json(error)
     })
   },
+  
   // add thought to user
   addThought({ params, body }, res) {
     console.log(params);
@@ -47,7 +48,7 @@ const thoughtController = {
 
   // add reaction to thought
   addReaction({ params, body }, res) {
-    Thought.findOneAndUpdate(
+    Thought.findByIdAndUpdate(
       { _id: params.thoughtId },
       { $push: { reactions: body } },
       { new: true, runValidators: true }
@@ -85,15 +86,36 @@ const thoughtController = {
       .catch(err => res.json(err))
   },
 
-  // remove reaction
-  removeReaction({ params }, res) {
-    Thought.findOneAndUpdate(
-      { _id: params.thoughtId },
-      { $pull: { reactions: { reactionId: params.reactionId } } },
+  // add reactions
+  addReaction({ params }, res) {
+    Thought.findByIdAndUpdate(
+      { _id: params.id },
+      { $push: { reactions: params.reactionId } },
+      {new: true}
+    )
+    .populate({ path: 'reactions', select: '-__v' })
+    .select('-__v')
+    .then((thought) => {
+      if(!thought) {
+        res.status(404).json({ message: 'No thought found with this id.' })
+        return
+      }
+      res.json(thought)
+    })
+    .catch((err) => res.json(err))
+  }, 
+
+  // delete reaction
+  deleteReaction({ params }, res) {
+    Thought.findByIdAndUpdate(
+      { _id: params.id },
+      { $pull: { reactions: params.reactionId } },
       { new: true }
     )
-      .then(dbUserData => res.json(dbUserData))
-      .catch(err => res.json(err))
+    .populate({ path: 'reactions', select: '-__v' })
+    .select('-__v')
+    .then((thought) => res.json(thought))
+    .catch((err) => res.json(err))
   }
 }
 

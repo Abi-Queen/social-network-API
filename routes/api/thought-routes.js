@@ -17,15 +17,11 @@ router.route('/').get(findThoughts)
 router
 .route('/:userId').get(findOneThought).post(addThought)
 
-// add reaction, delete thought
+// add reaction, delete thought, delete reaction
 router
   .route('/:userId/:thoughtId')
   .put(addReaction)
   .delete(removeThought)
-
-// delete reaction
-router
-.route('/:userId/:thoughtId/:reactionId')
-.delete(removeReaction)
+  .delete(deleteReaction)
 
 module.exports = router
