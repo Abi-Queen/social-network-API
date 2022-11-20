@@ -68,7 +68,7 @@ const userController = {
 
   // add friend
   addFriend({ params }, res) {
-    User.findOneandUpdate(
+    User.findByIdAndUpdate(
       { _id: params.id },
       { $push: { friends: params.friendId } },
       { new: true }
@@ -89,7 +89,7 @@ const userController = {
   deleteFriend({ params }, res) {
     User.findByIdAndUpdate(
       { _id: params.id },
-      { $pull: { friends: params.friend.Id } },
+      { $pull: { friends: params.friendId } },
       { new: true}
     )
     .populate({ path: 'friends', select: '-__v' })
