@@ -3,13 +3,13 @@ const { Thought, User } = require('../models')
 
 // find all thoughts
 const thoughtController = {
-  findThoughts(req, res) {
-    Thought.find()
+  getAllThoughts(req, res) {
+    Thought.find({})
     .then((data) => {
       res.json(data)
     })
     .catch(error => {
-      res.status(500).json(error)
+      res.status(400).json(error)
     })
   },
 

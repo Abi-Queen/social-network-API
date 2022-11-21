@@ -2,7 +2,7 @@ const router = require('express').Router()
 
 // import functions from thought-controller
 const {
-  findThoughts,
+  getAllThoughts,
   findOneThought,
   addThought,
   removeThought,
@@ -12,7 +12,7 @@ const {
 
 //find all thoughts
 router.route('/')
-.get(findThoughts)
+.get(getAllThoughts)
 .post(addThought)
 
 // find one, update delete thought by id, add or remove reactions

@@ -4,14 +4,6 @@ const userController = {
   // get all users
   getAllUsers(req, res) {
     User.find({})
-      // .populate({
-      //   path: 'thought',
-      //   select: '-__v'
-      // })
-      // .populate({
-      //   path: 'friends',
-      //   select: '-__v'
-      // })
       .sort({ _id: -1 })
       .then(dbUserData => res.json(dbUserData))
       .catch(err => {
@@ -24,11 +16,6 @@ const userController = {
   getUserById({ params }, res) {
     User.findOne({ _id: params.id })
     .populate('thoughts')
-    //   .populate({
-    //     path: 'friends',
-    //     select: '-__v'
-    //   })
-      // .select('-__v')
       .then(dbUserData => res.json(dbUserData))
       .catch(err => {
         console.log(err)
