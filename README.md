@@ -4,7 +4,7 @@
 This project is the API for a social network application to enable users to share and reply to each other's thoughts. It uses Express.js to create routes and the Mongoose ODM to connect to a MongoDB noSQL database. It runs with Node.js. Routes are tested in Insomnia.
 
 ## Video demo
-The app is demonstrated in this [video walkthrough](link).
+The app is demonstrated in this [video walkthrough](https://youtu.be/Ru98SC457gA).
 
 ## GitHub
 Here is the [GitHub repo](https://github.com/Abi-Queen/social-network-API). 
