@@ -1,4 +1,5 @@
 # Social Network API
+![screenshot of insomnia api testing](/social-network-ss.jpg)
 
 ## Description
 This project is the API for a social network application to enable users to share and reply to each other's thoughts. It uses Express.js to create routes and the Mongoose ODM to connect to a MongoDB noSQL database. It runs with Node.js. Routes are tested in Insomnia.
